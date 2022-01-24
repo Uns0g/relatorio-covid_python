@@ -1,6 +1,6 @@
 # Relatório COVID: DRS Com Maior Letalidade
 
-O objetivo deste relatório é mostrar, por meio dos dados coletados no [site do seade](https://www.seade.gov.br/coronavirus/) qual DRS (Departamento Regional de Saúde) tem a maior taxa de letalidade pelo COVID até o momento. A taxa é medida pelos casos e óbitos de cada cidade pertencente ao departamento.
+O objetivo deste relatório é mostrar, por meio dos dados coletados no [site do SEADE](https://www.seade.gov.br/coronavirus/) qual DRS (Departamento Regional de Saúde) tem a maior taxa de letalidade pelo COVID até o momento, ou seja, qual DRS perdeu mais infectados pelo COVID em relação ao total de infectados.
 
 ## Conteúdo
 
@@ -8,7 +8,7 @@ O objetivo deste relatório é mostrar, por meio dos dados coletados no [site do
 
 ## Como O Relatório É Gerado
 
-O relatório é gerado através da execução do script ```main.py``` no diretório principal deste repositório. Para ver o código clique acima no arquivo com o nome indicado ou [clique aqui](https://github.com/Uns0g/relatorio-covid_python/root/main.py). 
+O relatório é gerado através da execução do script ```main.py``` no diretório principal deste repositório. Para ver o código clique acima no arquivo com o nome indicado ou [clique aqui](https://github.com/Uns0g/relatorio-covid_python/blob/root/main.py). 
 
 ### Funcionamento E Execução Do Script
 

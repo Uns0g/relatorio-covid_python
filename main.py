@@ -1,6 +1,3 @@
-# OBJETIVOS:
-# - Alterar a coluna B da planilha
-# - Criar outra planilha com a estrutura dada em passos.md 
 import csv, requests, functools, os
 import openpyxl as opl
 import matplotlib.pyplot as plt
@@ -157,18 +154,18 @@ distribuirCidadesNasDRS()
 mediaSP = round(somarValoresDaColuna(planilha,todasAsColunas[4],2,planilha.max_row-2)*100/somarValoresDaColuna(planilha,todasAsColunas[3],2,planilha.max_row-2),2)
 todasAsMedias[17] = mediaSP
 
-# colocando as informações em gráfico
+# colocando as informações em gráfico e salvando -o
 plt.barh(todasAsDrs,todasAsMedias,color=['lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','#ff4137'])
 plt.grid(color='#ccc', axis='x')
-plt.colorbar
 
-plt.title('Taxa De Letalidade De Cada Departamento Regional De Saúde',fontsize=20)
+plt.title('Taxa De Letalidade De Cada Departamento Regional De Saúde',fontsize=18)
 plt.ylabel('DEPARTAMENTO', fontsize=14)
 plt.xlabel('LETALIDADE (%)', fontsize=14)
 
-plt.subplots_adjust(left=0.18)
+plt.savefig('departamentos.png',orientation='landscape',bbox_inches='tight')
 
-plt.show()
+# executando automaticamente o outro script
+exec(open('relatorio.py').read())
 
 # salvando o arquivo xlsx
 arquivo.save('municipios_drs.xlsx')
