@@ -16,7 +16,7 @@ with open('Dados-covid-19-municipios.csv') as file:
         planilha.append(row) # preenchendo o xlsx com os dados do csv
 
 
-""" Alterando a coluna de Grande Região para DRS """
+""" Alterando Coluna De Grande Região Para DRS """
 planilha.title = 'PLANILHA_MUNICIPIOS'
 
 # alterando o texto da célula que contém 'Grande Região' para 'Nome Da DRS'
@@ -92,10 +92,10 @@ def distribuirDrsNaPlanilha():
             planilha["B"+str(linha)].value = todasAsDrs[3]
         
         linha += 1
-
 distribuirDrsNaPlanilha()
 
-""" Criando uma nova planilha com focada nas DRSes """
+
+""" Criando Nova Planilha Com Focada Nos DRS """
 arquivo.create_sheet('PLANILHA_DRS')
 planilha2 = arquivo["PLANILHA_DRS"]
 
@@ -120,7 +120,8 @@ def somarValoresDaColuna(planilhaEscolhida,coluna,linha,ultimaLinha):
 
     return functools.reduce(lambda a, b: int(a)+int(b), array)
 
-todasAsMedias = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+todasAsTaxas = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+dadosDRSLetal = ['',0,'']
 def distribuirCidadesNasDRS():
     linha = 2
     posLinhasVazias = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
@@ -141,6 +142,7 @@ def distribuirCidadesNasDRS():
 
         linha += 1
 
+    maiorTaxa = 0
     for c in range(1,50,3):
         linhaVazia = posLinhasVazias[round(c/3)]
 
@@ -148,14 +150,22 @@ def distribuirCidadesNasDRS():
         planilha2[todasAsColunas[c]+str(linhaVazia)].value = somarValoresDaColuna(planilha2,todasAsColunas[c],3,linhaVazia)
         planilha2[todasAsColunas[c+1]+str(linhaVazia)].value = somarValoresDaColuna(planilha2,todasAsColunas[c+1],3,linhaVazia)
 
-        todasAsMedias[round(c/3)] = round(int(planilha2[todasAsColunas[c+1]+str(linhaVazia)].value)*100/int(planilha2[todasAsColunas[c]+str(linhaVazia)].value), 2)
+        todasAsTaxas[round(c/3)] = round(int(planilha2[todasAsColunas[c+1]+str(linhaVazia)].value)*100/int(planilha2[todasAsColunas[c]+str(linhaVazia)].value), 2)
+        if todasAsTaxas[round(c/3)] > maiorTaxa:
+            maiorTaxa = todasAsTaxas[round(c/3)]
+            dadosDRSLetal[0] = planilha2[todasAsColunas[c-1]+"1"].value
+            dadosDRSLetal[1] = todasAsTaxas[round(c/3)]
+            dadosDRSLetal[2] = str(planilha2[todasAsColunas[c+1]+str(linhaVazia)].value)
 distribuirCidadesNasDRS()
 
+# achando a taxa do estado inteiro e colocando-a no último valor de todas as taxas
 mediaSP = round(somarValoresDaColuna(planilha,todasAsColunas[4],2,planilha.max_row-2)*100/somarValoresDaColuna(planilha,todasAsColunas[3],2,planilha.max_row-2),2)
-todasAsMedias[17] = mediaSP
+todasAsTaxas[17] = mediaSP
 
+
+"""Criando Um PNG Com As Taxas Dos DRS"""
 # colocando as informações em gráfico e salvando -o
-plt.barh(todasAsDrs,todasAsMedias,color=['lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','#ff4137'])
+plt.barh(todasAsDrs,todasAsTaxas,color=['lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','lightblue','#ff4137'])
 plt.grid(color='#ccc', axis='x')
 
 plt.title('Taxa De Letalidade De Cada Departamento Regional De Saúde',fontsize=18)
@@ -163,6 +173,34 @@ plt.ylabel('DEPARTAMENTO', fontsize=14)
 plt.xlabel('LETALIDADE (%)', fontsize=14)
 
 plt.savefig('departamentos.png',orientation='landscape',bbox_inches='tight')
+
+
+"""Estilizando As Planilhas"""
+# função para estilizar colunas da planilha escolhida
+def estilizarColuna(planilhaEscolhida,coluna):
+    index = 2
+    tamanhoMaiorPalavra = 0
+    while planilhaEscolhida[coluna+str(index)].value != None:
+        celula = planilhaEscolhida[coluna+str(index)]
+        
+        celula.alignment = Alignment(horizontal='center', vertical='center')
+        solid = Side(border_style='medium', color="000000")
+        celula.border = Border(top=solid, bottom=solid, right=solid, left=solid)
+
+        if len(str(celula.value)) > tamanhoMaiorPalavra:
+            tamanhoMaiorPalavra = len(str(celula.value))
+            planilhaEscolhida.column_dimensions[coluna].width = tamanhoMaiorPalavra+8
+
+        index += 1
+
+# aplicando a estilização nas colunas de planilha
+def aplicarEstilizacaoNaPlanilha(planilhaEscolhida,limitForRange):
+    for posColuna in range(0,limitForRange,1):
+        estilizarColuna(planilhaEscolhida,todasAsColunas[posColuna])
+        planilhaEscolhida[todasAsColunas[posColuna]+"1"].font = Font(bold=True)
+        planilhaEscolhida[todasAsColunas[posColuna]+"1"].alignment = Alignment(horizontal='center', vertical='center')
+aplicarEstilizacaoNaPlanilha(planilha,5)
+aplicarEstilizacaoNaPlanilha(planilha2,len(todasAsColunas))
 
 # executando automaticamente o outro script
 exec(open('relatorio.py').read())
