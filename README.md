@@ -4,7 +4,17 @@ O objetivo deste relatório é mostrar, por meio dos dados coletados no [site do
 
 ## Conteúdo
 
-(Irei adicionar mais informações aqui quando finalizar o relatório)
+O relatório tem uma seção introdutória para explicar como tudo ele foi feito, os objetivos, de onde vieram os dados e como foram analisados.  
+
+Logo após a seção introdutória, há uma seção mostrando o contexto no qual foi feito o relatório e sobre o que ele estará mostrando exatamente.
+
+Na seção de análise de dados encontra-se o gráfico principal com o resultado da análise e texto explicando esse resultado.
+
+Na seção de conclusão mostra as consequências do resultado, no que aquilo realmente impactou a realidade.
+
+Para ver o relatório em pdf com essas seções [clique aqui](htpps://github.com/Uns0g/relatorio-covid_python/blob/root/relatorio-covid_taxa-de-letalidade_pedro-rossi.pdf)
+
+__(Irei adicionar mais informações aqui quando finalizar o relatório)__
 
 ## Pré-requisitos
 
@@ -20,6 +30,8 @@ O relatório é gerado através da execução do script ```main.py``` no diretó
 
 ### Funcionamento E Execução Do Script Principal
 
+---
+
 O script principal primeiramente converte o csv baixado do site do SEADE em xlsx, pois só assim é possível coletar os dados disponibilizados. 
 
 Depois de criada a planilha, o script substitui os valores da coluna B que estão separados por Grande Região para a DRS que o município pertence. É feita antes uma verificação para identificar a qual departamento o município pertence. 
@@ -33,8 +45,8 @@ Por fim a planilha é estilizada para ficar visualmente agradável a quem a visu
 ## Dicionário
 
 - **DRS:**
-    - Acrônimo para **D**epartamento **R**egional de **S**aúde. Os departamentos são divisões administrativas da Secretaria de Estado da Saúde de São Paulo e atualmente existem 17 delas dentro do Estado de São Paulo (para mais informações, clique neste [link](http://www.saude.sp.gov.br/ses/institucional/departamentos-regionais-de-saude/regionais-de-saude)).
+    - Acrônimo para **D**epartamento **R**egional de **S**aúde. Os departamentos são divisões administrativas da Secretaria de Estado da Saúde de São Paulo e atualmente existem 17 delas dentro do Estado de São Paulo (para mais informações, clique [neste link](http://www.saude.sp.gov.br/ses/institucional/departamentos-regionais-de-saude/regionais-de-saude)).
 - **Taxa De Letalidade:**
     - A porcentagem de pessoas infectadas por uma doença (neste caso a COVID-19) que evoluem para óbito.
 - **SEADE:**
-    - Fundação Sistema Estadual de Análise de Dados, utilizada pelo Governo Do Estado De São Paulo. Para ver o site deles [clique aqui](https://www.seade.gov.br).
+    - Fundação Sistema Estadual de Análise de Dados, utilizada pelo Governo Do Estado De São Paulo para análise de dados coletados por sistemas do governo. Para ver o site da fundação [clique aqui](https://www.seade.gov.br).
