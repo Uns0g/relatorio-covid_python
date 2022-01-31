@@ -12,9 +12,7 @@ Na seção de análise de dados encontra-se o gráfico principal com o resultado
 
 Na seção de conclusão mostra as consequências do resultado, no que aquilo realmente impactou a realidade.
 
-Para ver o relatório em pdf com essas seções [clique aqui](htpps://github.com/Uns0g/relatorio-covid_python/blob/root/relatorio-covid_taxa-de-letalidade_pedro-rossi.pdf)
-
-__(Irei adicionar mais informações aqui quando finalizar o relatório)__
+Para ver o relatório em pdf com essas seções [clique aqui](https://github.com/Uns0g/relatorio-covid_python/blob/root/relatorio-covid_taxa-de-letalidade_pedro-rossi.pdf)
 
 ## Pré-requisitos
 
@@ -29,8 +27,6 @@ __(Irei adicionar mais informações aqui quando finalizar o relatório)__
 O relatório é gerado através da execução do script ```main.py``` no diretório principal deste repositório, que automaticamente executa o ```repositorio.py``` que é quem realmente cria o relatório em pdf, seja pelo clique duplo no arquivo no diretório onde o arquivo se encontra, seja pela execução em uma IDE. Para ver o código clique acima no arquivo com o nome indicado ou [clique aqui](https://github.com/Uns0g/relatorio-covid_python/blob/root/main.py). 
 
 ### Funcionamento E Execução Do Script Principal
-
----
 
 O script principal primeiramente converte o csv baixado do site do SEADE em xlsx, pois só assim é possível coletar os dados disponibilizados. 
 
